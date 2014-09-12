@@ -1,0 +1,46 @@
+mct150:
+  combine_tagging: false
+  control_regions: &CRS [cr_w, cr_t, cr_z]
+  fixed_backgrounds: &FB [other, QCD]
+  signal_regions: [signal_mct150]
+  combined_backgrounds: &COMBINE
+    top: [singleTop]
+  systematics: &BASESYST
+    - jes
+    - jer
+    - jvf
+    - pu
+    - el
+    - mu
+    - met
+    - metres
+    - eglow
+    - mscale
+    - egzee
+    - c
+    - b
+    - u
+    - t
+    - flat_other
+    - mettrig
+    - signal_isr
+    - signal_xsec
+    - theory_Wjets
+    - theory_Zjets
+    - theory_top
+
+mct200:
+  combine_tagging: false
+  control_regions: *CRS
+  fixed_backgrounds: *FB
+  signal_regions: [signal_mct200]
+  combined_backgrounds: *COMBINE
+  systematics: *BASESYST
+
+mct250:
+  combine_tagging: false
+  control_regions: *CRS
+  fixed_backgrounds: *FB
+  signal_regions: [signal_mct250]
+  combined_backgrounds: *COMBINE
+  systematics: *BASESYST

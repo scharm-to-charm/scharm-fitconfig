@@ -31,12 +31,11 @@ all_plus_signal:
 
 all:
   combine_tagging: false
-  control_regions: &CRS [cr_w, cr_t, cr_z]
-  fixed_backgrounds: &FB [other, QCD]
-  signal_regions: &SR [signal_mct150]
-  combined_backgrounds: &COMBINE
-    top: [singleTop]
-  systematics: &BASESYST
+  control_regions: *CRS
+  fixed_backgrounds: *FB
+  signal_regions: *SR
+  combined_backgrounds: *COMBINE
+  systematics:
     - jes
     - jer
     - jvf

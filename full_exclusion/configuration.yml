@@ -23,8 +23,6 @@ mct150:
     - t
     - flat_other
     - mettrig
-    - signal_isr
-    - signal_xsec
     - theory_Wjets
     - theory_Zjets
     - theory_top

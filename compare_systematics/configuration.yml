@@ -57,6 +57,17 @@ all:
     - theory_Zjets
     - theory_top
 
+theory:
+  combine_tagging: false
+  control_regions: *CRS
+  fixed_backgrounds: *FB
+  signal_regions: *SR
+  combined_backgrounds: *COMBINE
+  systematics:
+    - theory_Wjets
+    - theory_Zjets
+    - theory_top
+
 experimental:
   combine_tagging: false
   control_regions: *CRS

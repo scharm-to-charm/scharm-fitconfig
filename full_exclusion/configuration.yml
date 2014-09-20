@@ -5,6 +5,9 @@ mct150:
   signal_regions: [signal_mct150]
   combined_backgrounds: &COMBINE
     top: [singleTop]
+  signal_systematics: &SIGSYST
+    - signal_isr
+    - signal_xsec
   systematics: &BASESYST
     - jes
     - jer
@@ -34,6 +37,7 @@ mct200:
   signal_regions: [signal_mct200]
   combined_backgrounds: *COMBINE
   systematics: *BASESYST
+  signal_systematics: *SIGSYST
 
 mct250:
   combine_tagging: false
@@ -42,3 +46,4 @@ mct250:
   signal_regions: [signal_mct250]
   combined_backgrounds: *COMBINE
   systematics: *BASESYST
+  signal_systematics: *SIGSYST

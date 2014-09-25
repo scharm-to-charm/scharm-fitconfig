@@ -31,8 +31,8 @@ jes_breakdown:
   combine_tagging: false
   control_regions: *CR
   fixed_backgrounds: *FB
-  signal_region: *SR
-  combined_backgrounds: &COMBINE
+  signal_regions: *SR
+  combined_backgrounds: *COMBINE
   systematics: [jpurho, jicals, jpunpv, jicalm,
     jflavcomp, jpumu, jpupt, #jcb, #NOTE: closeby was zero, check for bug...
     jenp1, jenp2, jenp3, jenp4, jenp5, jenp6, jbjes, jsp,
@@ -45,7 +45,7 @@ st_with_other:
   combine_tagging: false
   control_regions: *CR
   fixed_backgrounds: *FB
-  signal_region: *SR
+  signal_regions: *SR
   combined_backgrounds:
     other: [singleTop]
   systematics: *BASESYST

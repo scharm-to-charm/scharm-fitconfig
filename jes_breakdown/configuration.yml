@@ -1,0 +1,51 @@
+normal:
+  combine_tagging: false
+  control_regions: &CR [cr_z, cr_t, cr_w]
+  fixed_backgrounds: &FB [other, QCD]
+  signal_regions: &SR [signal_mct150]
+  combined_backgrounds: &COMBINE
+    top: [singleTop]
+  systematics: &BASESYST
+    - jes
+    - jer
+    - jvf
+    - pu
+    - el
+    - mu
+    - met
+    - metres
+    - eglow
+    - mscale
+    - egzee
+    - c
+    - b
+    - u
+    - t
+    - flat_other
+    - mettrig
+    - theory_Wjets
+    - theory_Zjets
+    - theory_top
+
+jes_breakdown:
+  combine_tagging: false
+  control_regions: *CR
+  fixed_backgrounds: *FB
+  signal_region: *SR
+  combined_backgrounds: &COMBINE
+  systematics: [jpurho, jicals, jpunpv, jicalm,
+    jflavcomp, jpumu, jpupt, #jcb, #NOTE: closeby was zero, check for bug...
+    jenp1, jenp2, jenp3, jenp4, jenp5, jenp6, jbjes, jsp,
+    jflavresp,
+    jer, jvf, pu, el, mu, met, metres, eglow, mscale, egzee, c, b, u, t,
+    flat_other, mettrig,
+    theory_Wjets, theory_Zjets, theory_top]
+
+st_with_other:
+  combine_tagging: false
+  control_regions: *CR
+  fixed_backgrounds: *FB
+  signal_region: *SR
+  combined_backgrounds:
+    other: [singleTop]
+  systematics: *BASESYST

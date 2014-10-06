@@ -6,7 +6,6 @@ mct150:
   combined_backgrounds: &COMBINE
     top: [singleTop]
   signal_systematics: &SIGSYST
-    - signal_isr
     - signal_xsec
   systematics: &BASESYST
     - jes
@@ -26,6 +25,7 @@ mct150:
     - t
     - flat_other
     - mettrig
+    - signal_isr
     - theory_Wjets
     - theory_Zjets
     - theory_top

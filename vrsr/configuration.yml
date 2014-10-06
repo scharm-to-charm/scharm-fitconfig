@@ -24,6 +24,7 @@ vrcrsr:
     - t
     - flat_other
     - mettrig
+    - signal_isr
     - theory_Wjets
     - theory_Zjets
     - theory_top

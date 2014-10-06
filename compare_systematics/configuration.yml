@@ -53,6 +53,7 @@ all:
     - t
     - flat_other
     - mettrig
+    - signal_isr
     - theory_Wjets
     - theory_Zjets
     - theory_top
@@ -64,6 +65,7 @@ theory:
   signal_regions: *SR
   combined_backgrounds: *COMBINE
   systematics:
+    - signal_isr
     - theory_Wjets
     - theory_Zjets
     - theory_top

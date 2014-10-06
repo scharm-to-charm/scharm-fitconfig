@@ -23,6 +23,7 @@ normal:
     - t
     - flat_other
     - mettrig
+    - signal_isr
     - theory_Wjets
     - theory_Zjets
     - theory_top
@@ -39,6 +40,7 @@ jes_breakdown:
     jflavresp,
     jer, jvf, pu, el, mu, met, metres, eglow, mscale, egzee, c, b, u, t,
     flat_other, mettrig,
+    signal_isr,
     theory_Wjets, theory_Zjets, theory_top]
 
 st_with_other:

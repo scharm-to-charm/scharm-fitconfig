@@ -3,7 +3,7 @@ crw_l1pt50:
   control_regions: &CRS [cr_w, cr_t, cr_z]
   fixed_backgrounds: &FB [other, QCD]
   signal_regions: &SR [signal_mct150]
-  validation_regions: &VR [vr_mct, vr_mcc]
+  validation_regions: &VR [fr_mct, fr_mcc]
   combined_backgrounds: &COMBINE
     top: [singleTop]
   systematics: &BASESYST

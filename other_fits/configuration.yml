@@ -51,3 +51,11 @@ st_with_other:
   combined_backgrounds:
     other: [singleTop]
   systematics: *BASESYST
+
+nicolas:
+  combine_tagging: false
+  control_regions: [cr_z_nicola, cr_t_nicola, cr_w_nicola]
+  fixed_backgrounds: *FB
+  signal_regions: *SR
+  combined_backgrounds: *COMBINE
+  systematics: *BASESYST

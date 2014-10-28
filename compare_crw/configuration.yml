@@ -31,7 +31,7 @@ crw_l1pt50:
 
 crw_l1pt25:
   combine_tagging: false
-  control_regions: [cr_w_l1pt25, cr_t, cr_z]
+  control_regions: &CRS25 [cr_w_l1pt25, cr_t, cr_z]
   fixed_backgrounds: *FB
   signal_regions: *SR
   validation_regions: *VR

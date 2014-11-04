@@ -3,7 +3,15 @@ vrcrsr:
   control_regions: &CRS [cr_w, cr_t, cr_z]
   fixed_backgrounds: &FB [other, QCD]
   signal_regions: &SR [signal_mct150, signal_mct200, signal_mct250]
-  validation_regions: &VR [fr_mct, fr_mcc]
+  validation_regions: &VR
+    - fr_mct
+    - fr_mcc
+    - cr_z_nicola
+    - cr_t_nicola
+    - cr_w_nicola
+    - cr_z_metola
+    - cr_t_metola
+    - cr_w_metola
   combined_backgrounds: &COMBINE
     top: [singleTop]
   systematics: &BASESYST

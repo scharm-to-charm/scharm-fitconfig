@@ -19,6 +19,9 @@ MONOJET_LIMITS=$FIT_INPUTS/mono-observed-exclusion.txt
 SC_CLSFILE=$FIT_INPUTS/stop-to-charm-cls.yml
 # need this to get the cross sections
 DATASET_META=$FIT_INPUTS/dataset-meta.yml
+# the fit inputs data files
+INPUT=$FIT_INPUTS/fit-inputs.yml
+TTBAR_INPUT=$FIT_INPUTS/ttbar-rw-fit-inputs.yml
 
 NTOYS=0 			# by default run asymptotic upper limits
 
@@ -429,10 +432,14 @@ makepars other_fits $DEFREGIONS 400_200 400-200
 makepars other_fits $NICKREGIONS nicolas
 
 # run validation / sr plotting stuff
+NICK_VR_PT=cr_w_nicola,cr_z_nicola,cr_t_nicola
+NICK_VR_MET=cr_w_metola,cr_z_metola,cr_t_metola
 makebg $INPUT vrsr
 makepars vrsr $VREGIONS vr_fit
 makepars vrsr $SIGREGIONS sr_fit
 makepars vrsr signal_mct150 onesr_fit
+makepars vrsr $NICK_VR_PT nick_vr_pt
+makepars vrsr $NICK_VR_MET nick_vr_met
 
 # zip up result
 if [[ $ZIP ]]

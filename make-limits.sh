@@ -247,7 +247,7 @@ function make_upper_limits() {
     local COMBINED_OUT=$UL_OUTDIR/combined-ul-cls.yml
     if [[ ! -f $COMBINED_OUT ]] ; then
 	susy-fit-add-xsec.py -i $UL_FILE $DATASET_META
-	if ! susy-fit-merge-cls.py $UL_FILE $CLS_FILE > $COMBINED_OUT; then
+	if ! susy-fit-cls-merge.py $UL_FILE $CLS_FILE > $COMBINED_OUT; then
 	    exit 2
 	fi
     fi

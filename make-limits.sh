@@ -204,7 +204,7 @@ function draw-cls-between () {
     local OUT=$OUTDIR/$4
     local EXTRA=${@:5}
     mkdir -p $OUT
-    local OUTFILE=$OUT/cls-combined.yml
+    local OUTFILE=$OUT/cls_combined.yml
     if [[ ! -f $OUTFILE ]] ; then
 	echo building $OUTFILE
 	if [[ -z $ext ]] ; then
@@ -213,7 +213,7 @@ function draw-cls-between () {
 	    susy-fit-cls-rename.py $CLS2 $ext | cat $CLS1 - > $OUTFILE
 	fi
     fi
-    local OUTPLOT=$OUT/compared-exclusion.pdf
+    local OUTPLOT=$OUT/compared_exclusion.pdf
     if [[ ! -f $OUTPLOT ]] ; then
 	echo drawing $OUTPLOT
 	susy-fit-draw-exclusion.py $OUTFILE -o $OUTPLOT $EXTRA
@@ -465,7 +465,10 @@ makepars vrsr $NICK_VR_MET nick_vr_met
 
 # ttbar reweighting check
 makelim $TTBAR_INPUT ttbar_rw ""
+makebg $TTBAR_INPUT ttbar_rw
 draw-cls-between full_exclusion ttbar_rw '' ttbar_rw -r mct150 with_ttbar_rw
+makepars ttbar_rw $VREGIONS vr_fit
+makepars ttbar_rw $SIGREGIONS sr_fit
 
 # zip up result
 if [[ $ZIP ]]

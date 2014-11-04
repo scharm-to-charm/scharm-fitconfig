@@ -48,7 +48,6 @@ function checkarg() {
     fi
 }
 
-INPUT=''
 DO_UL=''
 ZIP=''
 EE=''
@@ -195,6 +194,29 @@ function drawlimsubset() {
     if [[ ! -f $OUTNAME ]] ; then
 	echo drawing $2 from $CLSFILE
 	susy-fit-draw-exclusion.py $CLSFILE -o $OUTNAME $CONFIGS
+    fi
+}
+
+function draw-cls-between () {
+    local CLS1=$OUTDIR/$1/cls.yml
+    local CLS2=$OUTDIR/$2/cls.yml
+    local ext=$3
+    local OUT=$OUTDIR/$4
+    local EXTRA=${@:5}
+    mkdir -p $OUT
+    local OUTFILE=$OUT/cls-combined.yml
+    if [[ ! -f $OUTFILE ]] ; then
+	echo building $OUTFILE
+	if [[ -z $ext ]] ; then
+	    cat $CLS1 $CLS2 > $OUTFILE
+	else
+	    susy-fit-cls-rename.py $CLS2 $ext | cat $CLS1 - > $OUTFILE
+	fi
+    fi
+    local OUTPLOT=$OUT/compared-exclusion.pdf
+    if [[ ! -f $OUTPLOT ]] ; then
+	echo drawing $OUTPLOT
+	susy-fit-draw-exclusion.py $OUTFILE -o $OUTPLOT $EXTRA
     fi
 }
 
@@ -440,6 +462,10 @@ makepars vrsr $SIGREGIONS sr_fit
 makepars vrsr signal_mct150 onesr_fit
 makepars vrsr $NICK_VR_PT nick_vr_pt
 makepars vrsr $NICK_VR_MET nick_vr_met
+
+# ttbar reweighting check
+makelim $TTBAR_INPUT ttbar_rw ""
+draw-cls-between full_exclusion ttbar_rw '' ttbar_rw -r mct150 with_ttbar_rw
 
 # zip up result
 if [[ $ZIP ]]

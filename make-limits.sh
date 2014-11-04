@@ -401,6 +401,14 @@ then
     echo "can't find $MONOJET_LIMITS for full exclusion, quitting" >&2
     exit 1
 fi
+if [[ ! -f $TTBAR_INPUT ]] ; then
+    echo "can't find $TTBAR_INPUT, quitting" >&2
+    exit 1
+fi
+if [[ ! -f $INPUT ]] ; then
+    echo "can't find $INPUT, quitting" >&2
+    exit 1
+fi
 
 # __________________________________________________________________________
 # run the actual routines here

@@ -22,7 +22,8 @@ DATASET_META=$FIT_INPUTS/dataset-meta.yml
 # the fit inputs data files
 INPUT=$FIT_INPUTS/fit-inputs.yml
 TTBAR_INPUT=$FIT_INPUTS/ttbar-rw-fit-inputs.yml
-
+# veto some points due to bug in production
+VETO_POINTS="200-125 100-1 150-50 200-1 200-75 250-150 400-300 450-350"
 NTOYS=0 			# by default run asymptotic upper limits
 
 doc() {
@@ -81,6 +82,15 @@ then
     exit 1
 fi
 
+# __________________________________________________________________________
+# temp dir for intermediate stuff
+TMP_DIR=$(mktemp -d)
+function cleanup() {
+    echo cleaning up
+    rm -rf $TMP_DIR
+}
+trap cleanup EXIT
+
 # ____________________________________________________________________________
 # common utility functions (mostly checking for files)
 
@@ -137,17 +147,17 @@ function makelim() {
     fi
     mkdir -p $OUTDIR/$2
     local CLSFILE=$OUTDIR/$2/cls.yml
-    local CLSPATH=""
-    if (( $# >= 3 )) ; then CLSPATH=$3 ; fi
+    local CLSADD=""
+    if (( $# >= 3 )) ; then CLSADD=$3 ; fi
     if [[ ! -f $CLSFILE ]]
 	then
-	susy-fit-runfit.py $WSDIR -o $CLSFILE $EE
-	if [[ -f $CLSPATH ]] ; then
-	    cat $CLSPATH >> $CLSFILE
-	elif [[ -n $CLSPATH ]] ; then
-	    echo $CLSPATH not found! >&2
+	local CLSTMP=$TMP_DIR/cls.yml.tmp
+	susy-fit-runfit.py $WSDIR -o $CLSTMP $EE
+	if [[ -n $CLSADD && ! -f $CLSADD ]] ; then
+	    echo $CLSADD not found! >&2
 	    return 1
 	fi
+	cat $CLSADD $CLSTMP > $CLSFILE
     fi
     echo done limits for $2
 }
@@ -268,10 +278,10 @@ function make_upper_limits() {
     fi
     local COMBINED_OUT=$UL_OUTDIR/combined-ul-cls.yml
     if [[ ! -f $COMBINED_OUT ]] ; then
-	susy-fit-add-xsec.py -i $UL_FILE $DATASET_META
-	if ! susy-fit-cls-merge.py $UL_FILE $CLS_FILE > $COMBINED_OUT; then
-	    exit 2
-	fi
+	local TMP_UL=$TMP_DIR/upper-limits.yml
+	susy-fit-cls-merge.py $UL_FILE -v $VETO_POINTS > $TMP_UL
+	susy-fit-add-xsec.py -i $TMP_UL $DATASET_META
+	susy-fit-cls-merge.py $TMP_UL $CLS_FILE > $COMBINED_OUT
     fi
 
     local PLOTDIR=$UL_OUTDIR/upper_limits

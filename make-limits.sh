@@ -477,6 +477,7 @@ makebg $TTBAR_INPUT ttbar_rw
 draw-cls-between full_exclusion ttbar_rw '' ttbar_rw -r mct150 with_ttbar_rw
 makepars ttbar_rw $VREGIONS vr_fit
 makepars ttbar_rw $SIGREGIONS sr_fit
+makepars ttbar_rw $BGREGIONS bg_fit
 
 # zip up result
 if [[ $ZIP ]]

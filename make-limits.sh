@@ -488,6 +488,8 @@ makepars vrsr $NICK_VR_PT   nick_vr_pt  background vrcrsr
 makepars vrsr $NICK_VR_MET  nick_vr_met background vrcrsr
 makepars vrsr $SIGREGIONS   sr_fit      background nicola
 makepars vrsr $SIGREGIONS   sr_fit      background metola
+makepars vrsr $NICK_VR_PT   bg_fit      background nicola
+makepars vrsr $NICK_VR_MET  bg_fit      background metola
 
 # ttbar reweighting check
 makelim $TTBAR_INPUT ttbar_rw ""

@@ -247,7 +247,7 @@ function makews_updown() {
 }
 
 function makebg() {
-    if ! check_for_files $2 ; then return $?; fi
+    check_for_files $2
     if matches_in $2/workspaces "background*afterFit.root"; then
 	return 0
     fi
@@ -349,14 +349,14 @@ function makepars() {
     # 2: regions to print when making tables
     # 3: subdirectory for outputs
     # 4: signal point used in workspace (defaults to background)
+    # 5: fit configuration to use (default to all)
 
     echo making parameters for $1
 
-    local WSHEAD=background
+    local WSHEAD=${4:-'background'}
     local DRAWARGS=''
-    if (( $# >= 4 ))
+    if [[ $WSHEAD != background ]]
     then
-	WSHEAD=$4
 	DRAWARGS=-f
     fi
 
@@ -368,8 +368,13 @@ function makepars() {
 	return 1
     fi
 
+    if (( $# >= 5 )); then
+	local ALL_WS=$1/workspaces/$5/$WSMATCH
+    else
+	local ALL_WS=$1/workspaces/**/$WSMATCH
+    fi
     local fit
-    for fit in $1/workspaces/**/$WSMATCH
+    for fit in $ALL_WS
     do
 	local odir=$OUTDIR/$1/$(dirname ${fit#*/workspaces/})
 	if (( $# >= 2 )) ; then regs='-r '$2 ; fi
@@ -475,11 +480,14 @@ makepars other_fits $NICKREGIONS nicolas
 NICK_VR_PT=cr_w_nicola,cr_z_nicola,cr_t_nicola
 NICK_VR_MET=cr_w_metola,cr_z_metola,cr_t_metola
 makebg $INPUT vrsr
-makepars vrsr $VREGIONS vr_fit
-makepars vrsr $SIGREGIONS sr_fit
-makepars vrsr signal_mct150 onesr_fit
-makepars vrsr $NICK_VR_PT nick_vr_pt
-makepars vrsr $NICK_VR_MET nick_vr_met
+makepars vrsr $VREGIONS     vr_fit      background vrcrsr
+makepars vrsr $SIGREGIONS   sr_fit      background vrcrsr
+makepars vrsr $SIGREGIONS   sr_fit      background l1pt25
+makepars vrsr signal_mct150 onesr_fit   background vrcrsr
+makepars vrsr $NICK_VR_PT   nick_vr_pt  background vrcrsr
+makepars vrsr $NICK_VR_MET  nick_vr_met background vrcrsr
+makepars vrsr $SIGREGIONS   sr_fit      background nicola
+makepars vrsr $SIGREGIONS   sr_fit      background metola
 
 # ttbar reweighting check
 makelim $TTBAR_INPUT ttbar_rw ""

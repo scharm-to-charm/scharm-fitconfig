@@ -1,3 +1,6 @@
+# NOTE: none of these configurations should be used for exclusion,
+# since they all use multiple signal regions. They exist for the
+# sake of ``background-only'' (control region) fits.
 vrcrsr:
   combine_tagging: false
   control_regions: &CRS [cr_w, cr_t, cr_z]
@@ -43,5 +46,27 @@ l1pt25:
   fixed_backgrounds: *FB
   signal_regions: *SR
   validation_regions: *VR
+  combined_backgrounds: *COMBINE
+  systematics: *BASESYST
+
+nicola:
+  combine_tagging: false
+  control_regions:
+    - cr_z_nicola
+    - cr_t_nicola
+    - cr_w_nicola
+  fixed_backgrounds: *FB
+  signal_regions: *SR
+  combined_backgrounds: *COMBINE
+  systematics: *BASESYST
+
+metola:
+  combine_tagging: false
+  control_regions:
+    - cr_z_metola
+    - cr_t_metola
+    - cr_w_metola
+  fixed_backgrounds: *FB
+  signal_regions: *SR
   combined_backgrounds: *COMBINE
   systematics: *BASESYST

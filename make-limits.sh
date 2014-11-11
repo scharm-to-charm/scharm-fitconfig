@@ -13,8 +13,9 @@ FIT_INPUTS=fit_inputs
 # stuff for robustness (quit on nonzero exit, treat unset access as error)
 set -eu
 
-# monojet limits
+# monojet, pMSSM limits
 MONOJET_LIMITS=$FIT_INPUTS/mono-observed-exclusion.txt
+PMSSM_LIMITS=$FIT_INPUTS/Inclusive-pMSSM.txt
 # these get combined with our limits
 SC_CLSFILE=$FIT_INPUTS/stop-to-charm-cls.yml
 # need this to get the cross sections
@@ -177,6 +178,7 @@ function drawlim() {
     local OVL=$OUTDIR/$1/exclusion_overlay.pdf
     local BST=$OUTDIR/$1/exclusion_best.pdf
     local PTY=$OUTDIR/$1/exclusion_pretty.pdf
+    local MSSM=$OUTDIR/$1/exclusion_pmssm.pdf
     if [[ ! -f $OVL ]] ; then
 	echo drawing $OVL
 	susy-fit-draw-exclusion.py $CLSFILE -o $OVL $ADD
@@ -188,6 +190,11 @@ function drawlim() {
     if [[ ! -f $PTY ]] ; then
 	echo drawing $PTY
 	susy-fit-draw-exclusion.py $CLSFILE --mono $MONOJET_LIMITS -o $PTY $ADD
+    fi
+    if [[ ! -f $MSSM ]] ; then
+	echo drawing $MSSM
+	local MSSM_ARGS="--mono $MONOJET_LIMITS --add-limit $PMSSM_LIMITS"
+	susy-fit-draw-exclusion.py $CLSFILE $MSSM_ARGS -o $MSSM $ADD
     fi
 }
 function drawlimsubset() {
@@ -411,11 +418,13 @@ if [[ $DO_UL && ! -f $DATASET_META ]] ; then
     echo "can't find $DATASET_META for upper-limits, quitting" >&2
     exit 1
 fi
-if [[ ! -f $MONOJET_LIMITS ]]
-then
-    echo "can't find $MONOJET_LIMITS for full exclusion, quitting" >&2
-    exit 1
-fi
+for LIMITS in $MONOJET_LIMITS $PMSSM_LIMITS ; do
+    if [[ ! -f $LIMITS ]]
+    then
+	echo "can't find $LIMITS for full exclusion, quitting" >&2
+	exit 1
+    fi
+done
 if [[ ! -f $TTBAR_INPUT ]] ; then
     echo "can't find $TTBAR_INPUT, quitting" >&2
     exit 1

@@ -40,6 +40,14 @@ vrcrsr:
     - theory_Zjets
     - theory_top
 
+novr:
+  combine_tagging: false
+  control_regions: *CRS
+  fixed_backgrounds: *FB
+  signal_regions: *SR
+  combined_backgrounds: *COMBINE
+  systematics: *BASESYST
+
 l1pt25:
   combine_tagging: false
   control_regions: &CRS25 [cr_w_l1pt25, cr_t, cr_z]

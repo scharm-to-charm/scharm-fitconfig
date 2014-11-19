@@ -501,6 +501,7 @@ makepars vrsr $SIGREGIONS   sr_fit      background nicola
 makepars vrsr $SIGREGIONS   sr_fit      background metola
 makepars vrsr $NICK_VR_PT   bg_fit      background nicola
 makepars vrsr $NICK_VR_MET  bg_fit      background metola
+makepars vrsr $BGREGIONS    bg_fit      background novr
 
 # ttbar reweighting check
 makelim $TTBAR_INPUT ttbar_rw ""
@@ -515,6 +516,7 @@ makelim $NEW_CDI_INPUT new_cdi ""
 makebg $NEW_CDI_INPUT new_cdi
 draw-cls-between full_exclusion new_cdi '' new_cdi -r mct150 with_new_cdi
 makepars new_cdi $SIGREGIONS sr_fit
+makepars new_cdi $BGREGIONS bg_fit
 
 # zip up result
 if [[ $ZIP ]]

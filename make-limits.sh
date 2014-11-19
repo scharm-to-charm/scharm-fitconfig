@@ -23,6 +23,7 @@ DATASET_META=$FIT_INPUTS/dataset-meta.yml
 # the fit inputs data files
 INPUT=$FIT_INPUTS/fit-inputs.yml
 TTBAR_INPUT=$FIT_INPUTS/ttbar-rw-fit-inputs.yml
+NEW_CDI_INPUT=$FIT_INPUTS/new-cdi-fit-inputs.yml
 # veto some points due to bug in production
 VETO_POINTS="200-125 100-1 150-50 200-1 200-75 250-150 400-300 450-350"
 NTOYS=0 			# by default run asymptotic upper limits
@@ -508,6 +509,12 @@ draw-cls-between full_exclusion ttbar_rw '' ttbar_rw -r mct150 with_ttbar_rw
 makepars ttbar_rw $VREGIONS vr_fit
 makepars ttbar_rw $SIGREGIONS sr_fit
 makepars ttbar_rw $BGREGIONS bg_fit
+
+# new CDI check
+makelim $NEW_CDI_INPUT new_cdi ""
+makebg $NEW_CDI_INPUT new_cdi
+draw-cls-between full_exclusion new_cdi '' new_cdi -r mct150 with_new_cdi
+makepars new_cdi $SIGREGIONS sr_fit
 
 # zip up result
 if [[ $ZIP ]]

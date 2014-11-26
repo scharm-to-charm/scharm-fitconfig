@@ -26,6 +26,7 @@ TTBAR_INPUT=$FIT_INPUTS/ttbar-rw-fit-inputs.yml
 NEW_CDI_INPUT=$FIT_INPUTS/new-cdi-fit-inputs.yml
 # veto some points due to bug in production
 VETO_POINTS="200-125 100-1 150-50 200-1 200-75 250-150 400-300 450-350"
+
 NTOYS=0 			# by default run asymptotic upper limits
 
 doc() {
@@ -288,7 +289,8 @@ function make_upper_limits() {
     local COMBINED_OUT=$UL_OUTDIR/combined-ul-cls.yml
     if [[ ! -f $COMBINED_OUT ]] ; then
 	local TMP_UL=$TMP_DIR/upper-limits.yml
-	susy-fit-cls-merge.py $UL_FILE -v $VETO_POINTS > $TMP_UL
+	# used to use -v $VETO_POINTS here, removed
+	susy-fit-cls-merge.py $UL_FILE  > $TMP_UL
 	susy-fit-add-xsec.py -i $TMP_UL $DATASET_META
 	susy-fit-cls-merge.py $TMP_UL $CLS_FILE > $COMBINED_OUT
     fi

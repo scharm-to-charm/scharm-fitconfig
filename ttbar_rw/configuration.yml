@@ -1,5 +1,4 @@
 with_ttbar_rw:
-  combine_tagging: false
   control_regions: &CRS [cr_w, cr_t, cr_z]
   fixed_backgrounds: &FB [other, QCD]
   signal_regions: [signal_mct150]

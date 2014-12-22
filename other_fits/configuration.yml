@@ -1,5 +1,4 @@
 normal:
-  combine_tagging: false
   control_regions: &CR [cr_z, cr_t, cr_w]
   fixed_backgrounds: &FB [other, QCD]
   signal_regions: &SR [signal_mct150]
@@ -29,7 +28,6 @@ normal:
     - theory_top
 
 jes_breakdown:
-  combine_tagging: false
   control_regions: *CR
   fixed_backgrounds: *FB
   signal_regions: *SR
@@ -44,7 +42,6 @@ jes_breakdown:
     theory_Wjets, theory_Zjets, theory_top]
 
 st_with_other:
-  combine_tagging: false
   control_regions: *CR
   fixed_backgrounds: *FB
   signal_regions: *SR
@@ -53,7 +50,6 @@ st_with_other:
   systematics: *BASESYST
 
 nicolas:
-  combine_tagging: false
   control_regions: [cr_z_nicola, cr_t_nicola, cr_w_nicola]
   fixed_backgrounds: *FB
   signal_regions: *SR

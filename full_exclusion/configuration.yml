@@ -1,5 +1,4 @@
 mct150:
-  combine_tagging: false
   control_regions: &CRS [cr_w, cr_t, cr_z]
   fixed_backgrounds: &FB [other, QCD]
   signal_regions: [signal_mct150]
@@ -31,7 +30,6 @@ mct150:
     - theory_top
 
 mct200:
-  combine_tagging: false
   control_regions: *CRS
   fixed_backgrounds: *FB
   signal_regions: [signal_mct200]
@@ -40,7 +38,6 @@ mct200:
   signal_systematics: *SIGSYST
 
 mct250:
-  combine_tagging: false
   control_regions: *CRS
   fixed_backgrounds: *FB
   signal_regions: [signal_mct250]

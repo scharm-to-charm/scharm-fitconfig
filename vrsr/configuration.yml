@@ -2,7 +2,6 @@
 # since they all use multiple signal regions. They exist for the
 # sake of ``background-only'' (control region) fits.
 vrcrsr:
-  combine_tagging: false
   control_regions: &CRS [cr_w, cr_t, cr_z]
   fixed_backgrounds: &FB [other, QCD]
   signal_regions: &SR [signal_mct150, signal_mct200, signal_mct250]
@@ -41,7 +40,6 @@ vrcrsr:
     - theory_top
 
 novr:
-  combine_tagging: false
   control_regions: *CRS
   fixed_backgrounds: *FB
   signal_regions: *SR
@@ -49,7 +47,6 @@ novr:
   systematics: *BASESYST
 
 l1pt25:
-  combine_tagging: false
   control_regions: &CRS25 [cr_w_l1pt25, cr_t, cr_z]
   fixed_backgrounds: *FB
   signal_regions: *SR
@@ -58,7 +55,6 @@ l1pt25:
   systematics: *BASESYST
 
 nicola:
-  combine_tagging: false
   control_regions:
     - cr_z_nicola
     - cr_t_nicola
@@ -69,7 +65,6 @@ nicola:
   systematics: *BASESYST
 
 metola:
-  combine_tagging: false
   control_regions:
     - cr_z_metola
     - cr_t_metola
